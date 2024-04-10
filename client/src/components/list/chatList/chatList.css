@@ -1,0 +1,34 @@
+.search {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+  padding: 20px;
+  img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .searchBar {
+    flex: 1;
+    background-color: rgb(6, 6, 142,0.5);
+    align-items: center;
+    border-radius: 20px;
+    display: flex;
+    padding: 10px;
+    input{
+        background-color: transparent;
+        outline: none;
+        border: none;
+        flex: 1;
+        color: white;
+    }
+  }
+  .add{
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(6, 6, 142,0.5);
+  }
+}
