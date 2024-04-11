@@ -3,6 +3,8 @@
   border-right: solid 1px gray;
   border-left: solid 1px gray;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   .top {
     display: flex;
     align-items: center;
@@ -22,24 +24,117 @@
         object-fit: cover;
       }
     }
-    .texts{
+    .texts {
       display: flex;
       flex-direction: column;
       gap: 5px;
-      p{
+      p {
         font-size: 14px;
         font-weight: 300;
         color: rgb(198, 194, 194);
       }
     }
-    .icons{
-        display: flex;
-        gap: 20px;
-        img{
-          width: 20px;
-          height: 20px;
-
+    .icons {
+      display: flex;
+      gap: 20px;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+  .center {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    gap: 20px;
+    .message {
+      max-width: 70%;
+      gap: 20px;
+      display: flex;
+      p{
+        background: white;
+        padding: 20px;
+        color: black;
+        border-radius: 10px;
+      }
+      img{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      &.own {
+        align-self: flex-end;
+        .texts {
+          flex: 1;
+          gap: 5px;
+          display: flex;
+          flex-direction: column;
+          img{
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            object-fit: cover;
+          }
+          p {
+            background: #5183fe;
+            padding: 20px;
+            border-radius: 10px;
+          }
         }
+      }
+    }
+  }
+  .bottom {
+    display: flex;
+    margin-bottom: auto;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid gray;
+    gap: 10px;
+    img {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    .icons {
+      gap: 20px;
+      display: flex;
+      img {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+    }
+    input {
+      flex: 1;
+      background-color: rgb(6, 6, 142, 0.5);
+      border: none;
+      outline: none;
+      padding: 10px;
+      border-radius: 20px;
+      font-size: 16px;
+      color: white;
+    }
+    .emoji {
+      position: relative;
+
+      .picker {
+        position: absolute;
+        left: 0;
+        bottom: 50px;
+      }
+    }
+    .sendButton {
+      background: rgba(36, 200, 255, 0.5);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px 20px;
+      cursor: pointer;
     }
   }
 }
