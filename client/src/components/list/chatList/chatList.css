@@ -1,34 +1,66 @@
-.search {
-  align-items: center;
-  display: flex;
-  gap: 15px;
-  padding: 20px;
-  img {
-    width: 20px;
-    height: 20px;
-  }
+.chatList {
+  overflow: scroll;
+  flex: 1;
 
-  .searchBar {
-    flex: 1;
-    background-color: rgb(6, 6, 142,0.5);
+  .search {
     align-items: center;
-    border-radius: 20px;
     display: flex;
-    padding: 10px;
-    input{
+    gap: 15px;
+    padding: 20px;
+    img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .searchBar {
+      flex: 1;
+      background-color: rgb(6, 6, 142, 0.5);
+      align-items: center;
+      border-radius: 20px;
+      display: flex;
+      padding: 10px;
+      input {
         background-color: transparent;
         outline: none;
         border: none;
         flex: 1;
         color: white;
+      }
+    }
+    .add {
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: rgb(6, 6, 142, 0.5);
     }
   }
-  .add{
-    width: 36px;
-    height: 36px;
+  .item {
+    align-items: center;
+    gap: 20px;
+    display: flex;
+    padding: 20px;
     cursor: pointer;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: rgb(6, 6, 142,0.5);
+    border-bottom: 1px gray solid;
+    img{
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .texts{
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      span{
+        font-weight: 500;
+      }
+      p{
+        font-size: 16px;
+        font-weight: 300;
+      }
+
+    }
   }
 }

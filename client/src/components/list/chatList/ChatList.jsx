@@ -12,6 +12,27 @@ function ChatList() {
         <img className='add' src={addMode?"./minus.png":"./plus.png"} 
         onClick={()=>setAddMode((prev)=>!prev)} alt="" />
       </div>
+      <div className="item">
+        <img src="./avatar.png" alt="" />
+        <div className="texts">
+          <span>Ronaldo</span>
+          <p>Hello</p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="./avatar.png" alt="" />
+        <div className="texts">
+          <span>Ronaldo</span>
+          <p>Hello</p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="./avatar.png" alt="" />
+        <div className="texts">
+          <span>Ronaldo</span>
+          <p>Hello</p>
+        </div>
+      </div>
     </div>
   )
 }
