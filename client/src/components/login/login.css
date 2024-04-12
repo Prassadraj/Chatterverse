@@ -4,12 +4,23 @@
   display: flex;
   align-items: center;
   gap: 100px;
+  .separate{
+    width: 2px;
+    height: 80%;
+    background: rgb(106, 106, 106);
+    transition: 0.4s;
+    &:hover{
+      animation: line ;
+      background: rgb(184, 181, 181);
+    }
+    
+  }
   .item {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     form {
       display: flex;
       flex-direction: column;
@@ -21,7 +32,8 @@
         outline: none;
         border: none;
         border-radius: 10px;
-        color: black;
+        color: rgb(255, 249, 249);
+        background:  rgba(0, 0, 0, 0.5);;
       }
       label {
         width: 100%;
@@ -30,6 +42,28 @@
         justify-content: space-between;
         cursor: pointer;
         text-decoration: underline;
+
+        img{
+          width: 50px;
+          height: 50px;
+          object-fit: cover;
+          border-radius: 30px;
+          opacity: 0.6;
+        }
+      }
+      button{
+        width: 100%;
+        background-color: #036ee0;
+        opacity: 0.8;
+        padding: 10px;
+        border: none;
+        color: white;
+        font-weight: 500;
+        
+        &:hover{
+          background-color:#0053ab ;
+          opacity: 1;
+        }
       }
     }
   }
