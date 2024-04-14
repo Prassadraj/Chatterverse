@@ -1,0 +1,51 @@
+
+import { toast } from "react-toastify";
+import { create } from "zustand";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebase";
+import { useUserStore } from "./userStore";
+
+
+export const useChatStore = create((set) => ({
+  chatId: null,
+  user: null,
+  isCurrentUserBlocked: false,
+  isReceiverBlocked: false,
+  changeChat: (chatId, user) => {
+    const currentUser = useUserStore.getState().currentUser;
+console.log(chatId);
+    // CHECK IF CURRENT USER IS BLOCKED
+    if (user.bloked.includes(currentUser.id)) {
+      return set({
+        chatId,
+        user: null,
+        isCurrentUserBlocked: true,
+        isReceiverBlocked: false,
+      });
+    }
+
+    // CHECK IF RECEIVER IS BLOCKED
+    else if (currentUser.bloked.includes(user.id)) {
+      return set({
+        chatId,
+        user: user,
+        isCurrentUserBlocked: false,
+        isReceiverBlocked: true,
+      });
+    } else {
+      return set({
+        chatId,
+        user,
+        isCurrentUserBlocked: false,
+        isReceiverBlocked: false,
+      });
+    }
+  },
+
+  changeBlocked: () => {
+    set((state) => ({
+      ...state,
+      isReceiverBlocked: !state.isReceiverBlocked,
+    }));
+  },
+}));
