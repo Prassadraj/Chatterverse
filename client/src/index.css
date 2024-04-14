@@ -9,6 +9,10 @@
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
+
+:root{
+  --bgclr:#5183fe
+}
 body {
   background-image: url(/bg.jpg);
   display: flex;
@@ -24,4 +28,15 @@ body {
   height: 90vh;
   border-radius: 10px;
   display: flex;
+}
+.loading{
+  font-weight: 300;
+  border-radius: 30px;
+  padding: 20px;
+  color: rgb(0, 0, 0);
+  background-image: none;
+  font-size: 16px;
+  
+  background: var(--bgclr);
+  opacity: 0.8;
 }

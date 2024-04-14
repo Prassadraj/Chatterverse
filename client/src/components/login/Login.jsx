@@ -16,12 +16,14 @@ function Login() {
   });
   const [loading, setLoading] = useState(false);
   const handleAvatar = (e) => {
+    console.log(e.target.files[0]);
     if (e.target.files[0]) {
       setAvatar({
         file: e.target.files[0],
         url: URL.createObjectURL(e.target.files[0]),
       });
     }
+    console.log(avatar.file);
   };
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -32,6 +34,7 @@ function Login() {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const imgUrl = await upload(avatar.file);
+
       await setDoc(doc(db, "users", res.user.uid), {
         username,
         email,
@@ -56,7 +59,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const formData=new formData(e.target)
+    const formData=new FormData(e.target)
     const{email,password}=Object.fromEntries(formData)
     try {
       const res = await signInWithEmailAndPassword(auth,email,password);
@@ -72,7 +75,7 @@ function Login() {
     <div className="login">
       <div className="item">
         <h2>Welcome back,</h2>
-        <form onClick={handleLogin}>
+        <form onSubmit={handleLogin}>
           <input type="text" placeholder="Email" name="email" />
           <input type="password" placeholder="Password" name="password" />
           <button disabled={loading}>{loading ? "Loading" : "Sign In"}</button>
@@ -89,7 +92,7 @@ function Login() {
             type="file"
             id="file"
             style={{ display: "none" }}
-            onSubmit={handleAvatar}
+            onChange={handleAvatar}
           />
           <input type="text" placeholder="Username" name="username" />
           <input type="email" placeholder="Email" name="email" />
