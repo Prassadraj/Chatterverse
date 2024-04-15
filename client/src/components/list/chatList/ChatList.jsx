@@ -75,7 +75,7 @@ function ChatList() {
           key={chat.chatId}
           onClick={() => handleSelect(chat)}
           className="item"
-          style={{ backgroundColor: chat?.isSeen ? "transparent" : "blue" }}
+          style={{ backgroundColor: chat?.isSeen ? "transparent" : "#1097b9" }}
         >
           <img
             src={
