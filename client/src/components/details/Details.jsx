@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./details.css";
 import { auth, db } from "../../lib/firebase";
 import { useUserStore } from "../../lib/userStore";
 import { useChatStore } from "../../lib/chatStore";
-import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  getDoc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
+
 function Details() {
   const {
     chatId,
@@ -13,6 +21,9 @@ function Details() {
     isReceiverBlocked,
   } = useChatStore();
   const { currentUser } = useUserStore();
+  const [userChat, setUserChat] = useState([]);
+  const [showPhotos, setShowPhotos] = useState(true); // State to control photo visibility
+
   const handleBlock = async (e) => {
     if (!user) return;
     const userDocRef = doc(db, "users", currentUser.id);
@@ -25,6 +36,13 @@ function Details() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
+      setUserChat(res.data());
+    });
+  }, [chatId]);
+
   return (
     <div className="detail">
       <div className="user">
@@ -42,30 +60,28 @@ function Details() {
         <div className="option">
           <div className="title">
             <span>Shared Photos</span>
-            <img src="./arrowDown.png" alt="" />
+            <img
+              src="./arrowDown.png"
+              alt=""
+              onClick={() => setShowPhotos((prev) => !prev)}
+            />
           </div>
-          <div className="photos">
-            <div className="photoItem">
-              <div className="photoDetail">
-                <img
-                  src="https://www.sportico.com/wp-content/uploads/2021/06/CristianoRonaldoJuventus_AP20287595970355-e1622763628281.jpg?w=1280&h=790&crop=1"
-                  alt=""
-                />
-                <span>Ronaldo.png</span>
-              </div>
-              <img src="./download.png" alt="" />
+          {showPhotos && ( // Conditionally render based on showPhotos state
+            <div className="photos">
+              {userChat?.messages?.map(
+                (message) =>
+                  message.img && (
+                    <div className="photoItem" key={message?.createdAt}>
+                      <div className="photoDetail">
+                        <img src={message.img || "./avatar.png"} alt="" />
+                        <span>Photo</span>
+                      </div>
+                      <img src="./download.png" alt="" />
+                    </div>
+                  )
+              )}
             </div>
-            <div className="photoItem">
-              <div className="photoDetail">
-                <img
-                  src="https://www.sportico.com/wp-content/uploads/2021/06/CristianoRonaldoJuventus_AP20287595970355-e1622763628281.jpg?w=1280&h=790&crop=1"
-                  alt=""
-                />
-                <span>Ronaldo.png</span>
-              </div>
-              <img src="./download.png" alt="" />
-            </div>
-          </div>
+          )}
         </div>
         <div className="option">
           <div className="title">

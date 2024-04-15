@@ -20,11 +20,13 @@
     flex-direction: column;
     gap: 30px;
     .option {
+
       .title {
         display: flex;
         align-items: center;
         gap: 10px;
         justify-content: space-between;
+
         img {
           width: 30px;
           height: 30px;
@@ -35,6 +37,8 @@
         }
       }
       .photos {
+        overflow-y: scroll;
+        max-height: 100px;
         flex-direction: column;
         display: flex;
         gap: 15px;

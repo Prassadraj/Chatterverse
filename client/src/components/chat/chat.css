@@ -52,11 +52,11 @@
     gap: 20px;
     .message {
       max-width: 70%;
-      gap: 20px;
+      gap: 10px;
       display: flex;
       p{
         background: white;
-        padding: 20px;
+        padding: 10px;
         color: black;
         border-radius: 10px;
       }
@@ -79,7 +79,7 @@
         align-self: flex-end;
         .texts {
           flex: 1;
-          gap: 5px;
+          gap: 2px;
           display: flex;
           flex-direction: column;
           img{
@@ -90,7 +90,7 @@
           }
           p {
             background: #5183fe;
-            padding: 20px;
+            padding: 10px;
             border-radius: 10px;
           }
         }

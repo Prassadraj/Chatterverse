@@ -7,10 +7,12 @@ import { doc } from "firebase/firestore";
 import { useChatStore } from "../../lib/chatStore";
 import { useUserStore } from "../../lib/userStore";
 import upload from "../../lib/upload";
+import { format } from "timeago.js";
 function Chat() {
   const [openEmoji, setOpenEmoji] = useState(false);
   const [chats, setChats] = useState();
   const [text, setText] = useState("");
+  // const[sendImg,setSendImg]=useState(true)
   const [img, setImg] = useState({
     file: null,
     url: "",
@@ -23,12 +25,14 @@ function Chat() {
     setOpenEmoji(false);
   };
   const handleImg = (e) => {
+    setSendImg(prev=>!prev)
     if (e.target.files[0]) {
       setImg({
         file: e.target.files[0],
         url: URL.createObjectURL(e.target.files[0]),
       });
     }
+
     // console.log(avatar.file);
   };
   //behaviur: "smooth"
@@ -47,7 +51,8 @@ function Chat() {
 
   const handleSend = async (e) => {
     // e.preventDefault();
-    if (text === "") return;
+    if (text === "" && !img.url) return;
+    
     let imgUrl = null;
 
     try {
@@ -99,8 +104,8 @@ function Chat() {
         <div className="user">
           <img src={user?.avatar || "./avatar.png"} alt="" />
           <div className="texts">
-            <span>{user?.username ||"User"}</span>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+            <span>{user?.username || "User"}</span>
+            {/* <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p> */}
           </div>
         </div>
         <div className="icons">
@@ -119,11 +124,19 @@ function Chat() {
             }
             key={message?.createdAt}
           >
-            <img src="./avatar.png" alt="" />
+            <img
+              src={
+                message.senderId === currentUser.id
+                  ? currentUser.avatar
+                  : user.avatar
+              }
+              alt=""
+            />
+
             <div className="texts">
               {message.img && <img src={message.img} alt="" />}
-              <p>{message.text}</p>
-              {/* <span>{message.createdAt}</span> */}
+              {message.text ? <p>{message.text}</p> : " "}
+              <span>{format(message.createdAt.toDate())}</span>
             </div>
           </div>
         ))}
@@ -131,6 +144,7 @@ function Chat() {
           <div className="message own">
             <div className="texts">
               <img src={img.url} alt="" />
+              {/* {sendImg &&<p>Click send</p>} */}
             </div>
           </div>
         )}
@@ -147,6 +161,7 @@ function Chat() {
           <input
             type="file"
             id="file"
+            multiple
             style={{ display: "none" }}
             onChange={handleImg}
           />
