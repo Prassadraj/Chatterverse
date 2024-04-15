@@ -23,7 +23,7 @@ function Login() {
         url: URL.createObjectURL(e.target.files[0]),
       });
     }
-    console.log(avatar.file);
+    // console.log(avatar.file);
   };
   const handleRegister = async (e) => {
     e.preventDefault();

@@ -10,6 +10,7 @@ function ChatList() {
   const [chats, setChats] = useState([]);
   const { currentUser } = useUserStore();
   const { changeChat, chatId } = useChatStore();
+  const [inputText, setInputText] = useState("");
   useEffect(() => {
     const unSub = onSnapshot(
       doc(db, "userChats", currentUser.id),
@@ -48,6 +49,7 @@ function ChatList() {
       console.log(error);
     }
   };
+  const filteredSerarch=chats.filter(c=>c.user.username.toLowerCase().includes(inputText))
   //  console.log(chats);
 
   return (
@@ -55,7 +57,11 @@ function ChatList() {
       <div className="search">
         <div className="searchBar">
           <img src="./search.png" alt="" />
-          <input type="text" placeholder="Search" />
+          <input
+            onChange={(e) => setInputText(e.target.value)}
+            type="text"
+            placeholder="Search"
+          />
         </div>
         <img
           className="add"
@@ -64,16 +70,27 @@ function ChatList() {
           alt=""
         />
       </div>
-      {chats.map((chat) => (
+      {filteredSerarch.map((chat) => (
         <div
           key={chat.chatId}
           onClick={() => handleSelect(chat)}
           className="item"
           style={{ backgroundColor: chat?.isSeen ? "transparent" : "blue" }}
         >
-          <img src={chat.user.avatar || "./avatar.png"} alt="" />
+          <img
+            src={
+              chat.user.blocked.includes(currentUser.id)
+                ? "./avatar.png"
+                : chat.user.avatar || "./avatar.png"
+            }
+            alt=""
+          />
           <div className="texts">
-            <span>{chat.user.username}</span>
+            <span>
+              {chat.user.blocked.includes(currentUser.id)
+                ? "User"
+                : chat.user.username}
+            </span>
             <p>{chat.lastMessage}</p>
           </div>
         </div>
