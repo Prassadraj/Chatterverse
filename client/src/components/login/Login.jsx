@@ -38,9 +38,9 @@ function Login() {
       await setDoc(doc(db, "users", res.user.uid), {
         username,
         email,
-        avatar: imgUrl,
+        avatar: imgUrl ||"../avatar.png",
         id: res.user.uid,
-        bloked: [],
+        blocked: [],
       });
 
       await setDoc(doc(db, "userChats", res.user.uid), {
