@@ -32,7 +32,7 @@ To run the project locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-    https://github.com/Prassadraj/WeChat.git
+   https://github.com/Prassadraj/Chatterverse.git
 2. Navigate to the project directory:
    ```bash
     cd client
